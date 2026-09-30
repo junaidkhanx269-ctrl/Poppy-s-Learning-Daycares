@@ -24,16 +24,22 @@ import {
   Heart, 
   ShieldCheck, 
   ExternalLink,
-  MessageCircle,
   Award
 } from 'lucide-react';
 
-// Exact Direct Asset URLs
+// Exact Direct Asset URLs (Including all 10 Real Photos)
 const ASSETS = {
   logo: "https://i.ibb.co/gF7CsjG3/IMG-6641.jpg",
-  photo1: "https://i.ibb.co/zH69xVQy/IMG-6642.jpg", // Baby Room / Babies 0-2 yrs
-  photo2: "https://i.ibb.co/LDQ8LjqV/IMG-6643.jpg", // Preschool 3-5 yrs
-  photo3: "https://i.ibb.co/Fq5mbFFY/IMG-6644.jpg"  // Playrooms / Caterpillar Room
+  photo1: "https://i.ibb.co/zH69xVQy/IMG-6642.jpg",   // Baby Room / Babies 0-2 yrs
+  photo2: "https://i.ibb.co/LDQ8LjqV/IMG-6643.jpg",   // Preschool 3-5 yrs
+  photo3: "https://i.ibb.co/Fq5mbFFY/IMG-6644.jpg",   // Playrooms / Caterpillar Room
+  photo4: "https://i.ibb.co/2YN10WG4/IMG-6679.jpg",   // New Photo 1 (Baby Room sensory nook)
+  photo5: "https://i.ibb.co/cKs0rcqz/IMG-6678.jpg",   // New Photo 2 (Outdoor garden play)
+  photo6: "https://i.ibb.co/LD07wZtb/IMG-6677.jpg",   // New Photo 3 (STEM / Creative workspace)
+  photo7: "https://i.ibb.co/Q3x9DckT/IMG-6676.jpg",   // New Photo 4 (Indoor reading circle)
+  photo8: "https://i.ibb.co/MyWQWWcm/IMG-6675.jpg",   // New Photo 5 (Nursery details / Soft play)
+  photo9: "https://i.ibb.co/r2yxMJ4w/IMG-6674.jpg",   // New Photo 6 (Fine-motor development desk)
+  photo10: "https://i.ibb.co/1YFKWvQQ/IMG-6673.jpg"   // New Photo 7 (Botanical activity corner)
 };
 
 export default function App() {
@@ -43,16 +49,29 @@ export default function App() {
   // Navigation active section
   const [activeTab, setActiveTab] = useState('Home');
   
-  // Carousel State
+  // Carousel State: EXACTLY the 7 New Photos for the main Hero Slideshow Carousel
   const [carouselIndex, setCarouselIndex] = useState(0);
-  const carouselImages = [ASSETS.photo1, ASSETS.photo2, ASSETS.photo3];
-  const carouselCaptions = [
-    "Nurturing early senses in our premium baby nursery stream.",
-    "Cultivating critical thinking in our senior preschool school-readiness suite.",
-    "Creative adventures inside our signature Caterpillar Room playscape."
+  const carouselImages = [
+    ASSETS.photo4, // New 1: IMG-6679
+    ASSETS.photo5, // New 2: IMG-6678
+    ASSETS.photo6, // New 3: IMG-6677
+    ASSETS.photo7, // New 4: IMG-6676
+    ASSETS.photo8, // New 5: IMG-6675
+    ASSETS.photo9, // New 6: IMG-6674
+    ASSETS.photo10 // New 7: IMG-6673
   ];
 
-  // Auto preloader countdown under 1.5 sec (loaded in 1.1s)
+  const carouselCaptions = [
+    "Enriching sensory exploration with tactile setups in our baby nursery stream.",
+    "Joyful nature-play adventures in our leafy botanical yards.",
+    "STEM exploration and creative fine-motor workspaces.",
+    "Intimate, quiet circle storytelling corners to build vocabulary.",
+    "Serene, supportive rest and soft playscapes for premium nurture.",
+    "Fostering logical thinking and critical cognitive school-readiness.",
+    "Interactive botanical craft projects inside our signature classroom."
+  ];
+
+  // Auto preloader countdown under 1.5 sec
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -90,7 +109,7 @@ export default function App() {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  // Review Slider State (3 fake but extremely premium, realistic Sydney mum reviews)
+  // Review Slider State (Sydney mum reviews)
   const [reviewIndex, setReviewIndex] = useState(0);
   const reviews = [
     {
@@ -105,7 +124,7 @@ export default function App() {
       suburb: "Wattle Grove, Sydney",
       stars: 5,
       role: "Mother of Harrison (4 years)",
-      quote: "Poppy's school-readiness program operates on the level of elite private schools. Harrison is already engaging in advanced phonics and early stem concepts. The Caterpillar Room is a masterpieces of child-led learning, boasting beautiful timber materials and sensory setups. He has transitioned from a shy child to a confident, articulating little explorer. We couldn't be happier with our decision."
+      quote: "Poppy's school-readiness program operates on the level of elite private schools. Harrison is already engaging in advanced phonics and early stem concepts. The Caterpillar Room is a masterpiece of child-led learning, boasting beautiful timber materials and sensory setups. He has transitioned from a shy child to a confident, articulating little explorer. We couldn't be happier with our decision."
     },
     {
       name: "Amelie Bourassa",
@@ -154,7 +173,7 @@ export default function App() {
       time: "6:30 AM — Premium Morning Welcome",
       title: "Botanical Play & Cozy Soft Welcomes",
       description: "Our doors open to a warm, sunlit nursery. Babies enjoy quiet sensory play, while older children explore nature setups in the outdoor play garden.",
-      image: ASSETS.photo3,
+      image: ASSETS.photo5,
     },
     {
       time: "9:30 AM — Organic Morning Tea",
@@ -166,13 +185,13 @@ export default function App() {
       time: "10:00 AM — Core Educational Projects",
       title: "STEM, Literacy, and Caterpillar Art",
       description: "Small group projects in the Caterpillar Room. Children engage in teacher-led STEM activities, school-readiness pre-writing, and open-ended canvas painting.",
-      image: ASSETS.photo2,
+      image: ASSETS.photo3,
     },
     {
       time: "12:00 PM — Gourmet Lunch & Mindfulness",
       title: "Nourishment & Quiet Rest Reflection",
       description: "After a rich, hot lunch (e.g., free-range chicken cacciatore), soft piano music plays. Children transition into gentle naps or mindfulness relaxation sessions.",
-      image: ASSETS.photo1,
+      image: ASSETS.photo8,
     },
     {
       time: "3:00 PM — Extracurricular Enrichment",
@@ -182,14 +201,14 @@ export default function App() {
     }
   ];
 
-  // Instagram Feed simulation using different Crops of the 3 Real Photos (zero stock policy)
+  // Instagram Feed simulation using completely distinct real photos (strict zero-stock policy)
   const instagramFeed = [
-    { id: 1, src: ASSETS.photo1, position: "object-[center_top]", caption: "Immersive sensory mornings in our baby nursery 🧸 #PoppysNursery #EarlyLearning" },
-    { id: 2, src: ASSETS.photo2, position: "object-[left_center]", caption: "Our future leaders diving deep into phonics 📚 #SchoolReadiness #SydneyDaycare" },
-    { id: 3, src: ASSETS.photo3, position: "object-[right_bottom]", caption: "Exploring nature-play inside our beautiful Caterpillar Room 🌿 #ReggioEmilia" },
-    { id: 4, src: ASSETS.photo1, position: "object-[center_bottom]", caption: "Nurturing cozy connections and sensory discoveries ✨ #PremiumChildcare" },
-    { id: 5, src: ASSETS.photo2, position: "object-[center_center]", caption: "STEM mornings: building towers and testing theories 📐 #YoungMinds" },
-    { id: 6, src: ASSETS.photo3, position: "object-[left_bottom]", caption: "Messy hands, happy hearts inside our botanical art room 🎨 #CaterpillarRoom" }
+    { id: 1, src: ASSETS.photo4, caption: "Immersive sensory mornings in our baby nursery 🧸 #PoppysNursery #EarlyLearning #Moorebank" },
+    { id: 2, src: ASSETS.photo5, caption: "Our future explorers enjoying the beautiful botanical nature playscapes 🌿 #OutdoorPlay #SydneyKids" },
+    { id: 3, src: ASSETS.photo6, caption: "Our custom Caterpillar Room is filled with endless creative canvases 🎨 #ReggioEmilia #ChildLedArt" },
+    { id: 4, src: ASSETS.photo7, caption: "Morning library readings and early vocabulary circles 📚 #SchoolReadiness #EarlyLiteracy" },
+    { id: 5, src: ASSETS.photo8, caption: "Soft play coordination and gentle milestone nurture 🧸 #BabyNursery #PremiumCare" },
+    { id: 6, src: ASSETS.photo9, caption: "Developing precision fine-motor and spatial math capabilities 📐 #STEMMinds #CriticalThinking" }
   ];
 
   // Handle Form Submission with WhatsApp Link Generation
@@ -198,13 +217,12 @@ export default function App() {
     
     // Select the correct contact phone based on Room choice
     const isBabyRoom = enrollForm.room.includes("Baby");
-    const targetPhone = isBabyRoom ? "0297302977" : "0297301106";
+    const formattedWaNumber = isBabyRoom ? "61297302977" : "61297301106";
     
     // Build WhatsApp message
     const message = `Hello Poppy's Learning Daycare! 🌸\n\nI would love to book a luxury tour to enroll my child.\n\n*Details:*\n• *Parent Name:* ${enrollForm.parentName}\n• *Parent Phone:* ${enrollForm.parentPhone}\n• *Child Name:* ${enrollForm.childName}\n• *Child DOB:* ${enrollForm.childDob}\n• *Preferred Start Date:* ${enrollForm.preferredDate}\n• *Interested Room:* ${enrollForm.room}\n\nPlease let me know your availability for a private boutique tour! Thank you. ✨`;
     
     const encodedMessage = encodeURIComponent(message);
-    const formattedWaNumber = isBabyRoom ? "61297302977" : "61297301106";
     const waUrl = `https://wa.me/${formattedWaNumber}?text=${encodedMessage}`;
     
     window.open(waUrl, '_blank');
@@ -313,7 +331,7 @@ export default function App() {
             ))}
           </nav>
 
-          {/* Action Zone (Right - All buttons black with white text, hover scale 1.05) */}
+          {/* Action Zone (Right) */}
           <div className="flex items-center gap-3">
             <a 
               href="tel:0297301106"
@@ -373,7 +391,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Action buttons (All buttons black with white text, hover scale 1.05) */}
+            {/* Action buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <a 
                 href="#enroll-now"
@@ -422,11 +440,10 @@ export default function App() {
 
           </div>
 
-          {/* Right Image Carousel Column */}
+          {/* Right Image Carousel Column (Displaying EXACTLY the 7 New Images as slides) */}
           <div className="col-span-1 lg:col-span-6 relative">
             <div className="relative h-[480px] md:h-[540px] w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-neutral-100">
               
-              {/* AnimatePresence for slow Airbnb-style Ken Burns zoom effects */}
               <AnimatePresence mode="wait">
                 <motion.img 
                   key={carouselIndex}
@@ -449,7 +466,6 @@ export default function App() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
               {/* FLOATING BADGES WITH BLUR (Luxury Glassmorphism Style) */}
-              {/* Badge 1: CCS Approved */}
               <motion.div 
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -459,7 +475,6 @@ export default function App() {
                 <span className="text-[11px] font-bold text-[#1A1A1A] tracking-wide uppercase">CCS Approved</span>
               </motion.div>
 
-              {/* Badge 2: Exceeding NQS */}
               <motion.div 
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
@@ -469,7 +484,6 @@ export default function App() {
                 <span className="text-[11px] font-bold text-[#1A1A1A] tracking-wide uppercase">Exceeding NQS</span>
               </motion.div>
 
-              {/* Badge 3: 02 9730 2977 Phone */}
               <motion.div 
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
@@ -490,14 +504,14 @@ export default function App() {
                 <div className="flex items-center gap-2">
                   <button 
                     onClick={() => setCarouselIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length)}
-                    className="p-2 rounded-full bg-white/10 hover:bg-white/30 text-white backdrop-blur-sm transition-all active:scale-90"
+                    className="p-2 rounded-full bg-white/10 hover:bg-white/30 text-white backdrop-blur-sm transition-all active:scale-90 animate-none cursor-pointer"
                     aria-label="Previous slide"
                   >
                     <ChevronLeft size={16} />
                   </button>
                   <button 
                     onClick={() => setCarouselIndex((prev) => (prev + 1) % carouselImages.length)}
-                    className="p-2 rounded-full bg-white/10 hover:bg-white/30 text-white backdrop-blur-sm transition-all active:scale-90"
+                    className="p-2 rounded-full bg-white/10 hover:bg-white/30 text-white backdrop-blur-sm transition-all active:scale-90 animate-none cursor-pointer"
                     aria-label="Next slide"
                   >
                     <ChevronRight size={16} />
@@ -600,7 +614,7 @@ export default function App() {
                     <Baby size={24} className="text-[#E53935]" />
                   </div>
                   
-                  {/* Location & Contact (Zero Pill) */}
+                  {/* Location & Contact */}
                   <div className="flex items-center gap-2 text-xs text-[#1A1A1A]/60 mt-2 font-semibold">
                     <span>134 Nuwarra Road</span>
                     <span aria-hidden="true">·</span>
@@ -679,7 +693,7 @@ export default function App() {
                     <Sparkles size={24} className="text-[#7A9A6A]" />
                   </div>
                   
-                  {/* Location & Contact (Zero Pill) */}
+                  {/* Location & Contact */}
                   <div className="flex items-center gap-2 text-xs text-[#1A1A1A]/60 mt-2 font-semibold">
                     <span>147 Nuwarra Road</span>
                     <span aria-hidden="true">·</span>
@@ -737,7 +751,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 5. PLAYROOMS & EXTRACURRICULAR: Masonry gallery with Caterpillar Room */}
+      {/* 5. PLAYROOMS & EXTRACURRICULAR: Masonry gallery with all new real photos */}
       <section id="playrooms" className="py-24 px-4 md:px-8 bg-[#FFFBF5] relative overflow-hidden border-t border-[#1A1A1A]/5">
         <div className="max-w-7xl mx-auto space-y-16">
           
@@ -745,109 +759,143 @@ export default function App() {
             <div className="space-y-4 max-w-2xl">
               <span className="text-xs font-bold text-[#E53935] uppercase tracking-widest block">Signature Spaces</span>
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#1A1A1A]">
-                Inside The Caterpillar Room & Beyond
+                Boutique Early Learning Playscapes
               </h2>
               <p className="text-sm text-[#1A1A1A]/70">
-                A showcase of curated learning rooms, nature-play outdoor spots, and boutique developmental spaces at Nuwarra Road. Click any image to view details.
+                A gorgeous showcase of our actual classrooms, botanical playscapes, and indoor sensory lounges. Click any image to view in high resolution.
               </p>
             </div>
             <div className="flex items-center gap-4 text-xs font-semibold text-[#1A1A1A]/70">
-              <span className="text-[#E53935]">● Playrooms</span>
+              <span className="text-[#E53935]">● Caterpillar Room</span>
               <span>·</span>
-              <span className="text-[#7A9A6A]">● Caterpillar Room</span>
+              <span className="text-[#7A9A6A]">● Botanical Gardens</span>
               <span>·</span>
-              <span className="text-neutral-500">● Sensory Playgrounds</span>
+              <span className="text-neutral-500">● Sensory Studios</span>
             </div>
           </div>
 
-          {/* Masonry-Style Interactive Gallery */}
+          {/* Expanded Masonry Gallery with Real Photos */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             
-            {/* Main Marquee Card 1 */}
-            <div className="col-span-1 md:col-span-8 group relative overflow-hidden rounded-2xl border border-[#1A1A1A]/5 shadow-sm h-96">
+            {/* Card 1: Main featured Caterpillar Room (Photo 3) */}
+            <div className="col-span-1 md:col-span-8 group relative overflow-hidden rounded-2xl border border-[#1A1A1A]/5 shadow-sm h-[400px]">
               <img 
                 src={ASSETS.photo3} 
-                alt="Signature Caterpillar Playroom at Poppy's Daycare" 
+                alt="Signature Caterpillar Playroom at Poppy's" 
                 className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 cursor-zoom-in"
                 referrerPolicy="no-referrer"
                 onClick={() => setLightboxImage(ASSETS.photo3)}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/85 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-6 left-6 text-white space-y-1">
                 <span className="text-[10px] uppercase font-bold tracking-widest text-[#7A9A6A]">Signature Centerpiece</span>
-                <h3 className="text-xl font-serif font-bold">The Caterpillar Creative Room</h3>
-                <p className="text-xs text-white/80 max-w-md">Our premium classroom focused on open-ended, child-led visual learning and messy craft sensory exploration.</p>
+                <h3 className="text-2xl font-serif font-bold">The Caterpillar Creative Studio</h3>
+                <p className="text-xs text-white/80 max-w-lg">Our premier classroom layout centered on Reggio Emilia hands-on art projects, painting, and visual discovery.</p>
               </div>
             </div>
 
-            {/* Photo Card 2 */}
-            <div className="col-span-1 md:col-span-4 group relative overflow-hidden rounded-2xl border border-[#1A1A1A]/5 shadow-sm h-96">
+            {/* Card 2: Botanical Nature Gardens (Photo 5) */}
+            <div className="col-span-1 md:col-span-4 group relative overflow-hidden rounded-2xl border border-[#1A1A1A]/5 shadow-sm h-[400px]">
               <img 
-                src={ASSETS.photo1} 
-                alt="Infant Sensory Playscape" 
+                src={ASSETS.photo5} 
+                alt="Boutique Outdoor Play Areas" 
                 className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 cursor-zoom-in"
                 referrerPolicy="no-referrer"
-                onClick={() => setLightboxImage(ASSETS.photo1)}
+                onClick={() => setLightboxImage(ASSETS.photo5)}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/85 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-6 left-6 text-white space-y-1">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#E53935]">Babies 0-2 yrs</span>
-                <h3 className="text-lg font-serif font-bold">The Sensory Sleep Sanctuary</h3>
-                <p className="text-xs text-white/80">Soft wood architecture, noise-insulated panels, and light controllers designed for pristine rests.</p>
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#E53935]">Outdoor Stream</span>
+                <h3 className="text-xl font-serif font-bold">Botanical Nature Gardens</h3>
+                <p className="text-xs text-white/80">Soft timber playhouses, sensory sandboxes, and safe organic gardens for plant explorations.</p>
               </div>
             </div>
 
-            {/* Photo Card 3 */}
-            <div className="col-span-1 md:col-span-4 group relative overflow-hidden rounded-2xl border border-[#1A1A1A]/5 shadow-sm h-80">
+            {/* Card 3: Creative Interactive Circle (Photo 7) */}
+            <div className="col-span-1 md:col-span-4 group relative overflow-hidden rounded-2xl border border-[#1A1A1A]/5 shadow-sm h-[320px]">
               <img 
-                src={ASSETS.photo2} 
-                alt="Preschool Interactive Circle" 
+                src={ASSETS.photo7} 
+                alt="Sensory Reading Lounges" 
                 className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 cursor-zoom-in"
                 referrerPolicy="no-referrer"
-                onClick={() => setLightboxImage(ASSETS.photo2)}
+                onClick={() => setLightboxImage(ASSETS.photo7)}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/85 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-6 left-6 text-white space-y-1">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#7A9A6A]">Preschool 3-5 yrs</span>
-                <h3 className="text-lg font-serif font-bold">School Readiness Studio</h3>
-                <p className="text-xs text-white/80">Interactive smart reading areas, early mathematics kits, and self-confidence project boards.</p>
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#7A9A6A]">Preschool Stream</span>
+                <h3 className="text-lg font-serif font-bold">Interactive Reading Circle</h3>
+                <p className="text-xs text-white/80">Spacious library setup for structured circle storytelling and language play.</p>
+              </div>
+            </div>
+
+            {/* Card 4: Nursery Play Coordination (Photo 8) */}
+            <div className="col-span-1 md:col-span-4 group relative overflow-hidden rounded-2xl border border-[#1A1A1A]/5 shadow-sm h-[320px]">
+              <img 
+                src={ASSETS.photo8} 
+                alt="Infant Play Coordination" 
+                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 cursor-zoom-in"
+                referrerPolicy="no-referrer"
+                onClick={() => setLightboxImage(ASSETS.photo8)}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/85 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-6 left-6 text-white space-y-1">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#E53935]">Nursery Detail</span>
+                <h3 className="text-lg font-serif font-bold">Sensory Infant Nooks</h3>
+                <p className="text-xs text-white/80">Plush baby carpets, soft motor activity centers, and custom teething structures.</p>
+              </div>
+            </div>
+
+            {/* Card 5: Botanical Activity Corner (Photo 10) */}
+            <div className="col-span-1 md:col-span-4 group relative overflow-hidden rounded-2xl border border-[#1A1A1A]/5 shadow-sm h-[320px]">
+              <img 
+                src={ASSETS.photo10} 
+                alt="Botanical Activity Corner" 
+                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 cursor-zoom-in"
+                referrerPolicy="no-referrer"
+                onClick={() => setLightboxImage(ASSETS.photo10)}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/85 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-6 left-6 text-white space-y-1">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#7A9A6A]">Creative Corner</span>
+                <h3 className="text-lg font-serif font-bold">Botanical Craft Lounges</h3>
+                <p className="text-xs text-white/80">Hands-on organic materials and interactive floral discovery tables.</p>
               </div>
             </div>
 
             {/* Educational Extracurricular Info Card */}
-            <div id="extracurricular" className="col-span-1 md:col-span-8 bg-[#1A1A1A] rounded-2xl p-8 md:p-10 text-[#FFFBF5] flex flex-col justify-between h-80 relative overflow-hidden">
+            <div id="extracurricular" className="col-span-1 md:col-span-12 bg-[#1A1A1A] rounded-2xl p-8 md:p-12 text-[#FFFBF5] flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 relative overflow-hidden">
               <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-[#7A9A6A]/10 rounded-full blur-2xl" />
               <div className="absolute -top-10 -left-10 w-44 h-44 bg-[#E53935]/10 rounded-full blur-2xl" />
               
-              <div className="space-y-4 relative z-10">
+              <div className="space-y-4 relative z-10 max-w-2xl">
                 <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#7A9A6A] tracking-wider uppercase">
                   <Sparkles size={14} />
                   <span>Curricular Highlights</span>
                 </div>
-                <h3 className="text-2xl font-serif font-bold md:text-3xl max-w-md leading-tight text-white">
+                <h3 className="text-2xl font-serif font-bold md:text-3xl max-w-xl leading-tight text-white">
                   Included Premium Extracurricular Classes
                 </h3>
-                <p className="text-sm text-white/80 max-w-xl">
+                <p className="text-sm text-white/80">
                   We believe every child deserves comprehensive exposure. Unlike typical daycares charging extra, Poppy's includes elite extracurricular programs in your standard daily fee.
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/10 relative z-10 text-xs text-white/95">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t lg:border-t-0 lg:border-l border-white/10 lg:pl-10 relative z-10 text-xs text-white/95 shrink-0">
                 <div>
                   <h4 className="font-bold text-[#7A9A6A]">French Immersion</h4>
-                  <p className="text-[11px] text-white/70">Language & music play</p>
+                  <p className="text-[11px] text-white/70 mt-0.5">Language & music play</p>
                 </div>
                 <div>
                   <h4 className="font-bold text-[#E53935]">Phonics First</h4>
-                  <p className="text-[11px] text-white/70">Literacy foundation</p>
+                  <p className="text-[11px] text-white/70 mt-0.5">Literacy foundation</p>
                 </div>
                 <div>
                   <h4 className="font-bold text-[#7A9A6A]">Savage STEM</h4>
-                  <p className="text-[11px] text-white/70">Interactive science</p>
+                  <p className="text-[11px] text-white/70 mt-0.5">Interactive science</p>
                 </div>
                 <div>
                   <h4 className="font-bold text-[#E53935]">Eco-Wellness</h4>
-                  <p className="text-[11px] text-white/70">Botanical play & nutrition</p>
+                  <p className="text-[11px] text-white/70 mt-0.5">Botanical play & nutrition</p>
                 </div>
               </div>
             </div>
@@ -857,15 +905,13 @@ export default function App() {
         </div>
       </section>
 
-      {/* 6. THEN & NOW + EDUCATORS: Narrative Story Section */}
+      {/* 6. THEN & NOW + EDUCATORS: Story Section */}
       <section id="celebrations" className="py-24 px-4 md:px-8 bg-[#FFFBF5] border-t border-[#1A1A1A]/5 relative overflow-hidden">
         
-        {/* Soft decorative background leaf shape */}
         <div className="absolute top-1/2 -left-16 w-32 h-32 bg-[#7A9A6A]/5 rounded-full blur-2xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto space-y-16">
           
-          {/* Section title */}
           <div className="max-w-3xl mx-auto text-center space-y-4">
             <span className="text-xs font-bold text-[#7A9A6A] uppercase tracking-widest block">Inspired Educators</span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#1A1A1A]">
@@ -879,7 +925,7 @@ export default function App() {
           <div className="bg-[#FFFBF5] border border-[#1A1A1A]/5 rounded-2xl overflow-hidden shadow-sm p-6 md:p-12 max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               
-              {/* Left Column: Image with interactive toggle indicator */}
+              {/* Left Column: Image with interactive toggle */}
               <div className="col-span-1 lg:col-span-5 space-y-4">
                 <div className="relative h-[320px] rounded-xl overflow-hidden shadow-md border-4 border-white bg-neutral-100 group">
                   <img 
@@ -986,7 +1032,6 @@ export default function App() {
       {/* 7. REVIEWS: Slider with 5-Star Google style */}
       <section id="reviews" className="py-24 px-4 md:px-8 bg-[#1A1A1A] text-white relative overflow-hidden">
         
-        {/* Soft background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#7A9A6A]/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-5xl mx-auto space-y-12 relative z-10">
@@ -1007,7 +1052,6 @@ export default function App() {
 
           <div className="relative bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 shadow-xl backdrop-blur-md">
             
-            {/* Elegant large quote marks */}
             <span className="absolute top-4 right-10 text-8xl font-serif text-[#7A9A6A]/10 select-none">“</span>
 
             <AnimatePresence mode="wait">
@@ -1091,12 +1135,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* 8. ENROLLING BANNER & FORM: WhatsApp Action */}
+      {/* 8. ENROLLING BANNER & FORM */}
       <section id="enroll-now" className="py-24 px-4 md:px-8 bg-[#FFFBF5] relative">
         <div className="max-w-4xl mx-auto bg-white border border-[#1A1A1A]/5 rounded-2xl shadow-xl overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-12">
             
-            {/* Left side column: Elegant introductory header */}
+            {/* Left side column */}
             <div className="col-span-1 md:col-span-5 bg-[#7A9A6A] p-8 md:p-10 text-white flex flex-col justify-between">
               <div className="space-y-6">
                 <span className="text-[10px] tracking-widest uppercase font-bold text-[#FFFBF5]/80 block">Getting Started is Easy</span>
@@ -1133,7 +1177,6 @@ export default function App() {
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Parent Name */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-[#1A1A1A]/80 flex items-center gap-1">
                       <User size={12} className="text-[#7A9A6A]" /> Parent Full Name *
@@ -1148,7 +1191,6 @@ export default function App() {
                     />
                   </div>
 
-                  {/* Parent Phone */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-[#1A1A1A]/80 flex items-center gap-1">
                       <Phone size={12} className="text-[#7A9A6A]" /> Mobile Phone *
@@ -1165,7 +1207,6 @@ export default function App() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Child Name */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-[#1A1A1A]/80 flex items-center gap-1">
                       <Baby size={12} className="text-[#E53935]" /> Child Name *
@@ -1180,7 +1221,6 @@ export default function App() {
                     />
                   </div>
 
-                  {/* Child DOB */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-[#1A1A1A]/80 flex items-center gap-1">
                       <Calendar size={12} className="text-[#E53935]" /> Child Date of Birth *
@@ -1196,7 +1236,6 @@ export default function App() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Preferred Start Date */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-[#1A1A1A]/80">
                       Preferred Start Date *
@@ -1210,7 +1249,6 @@ export default function App() {
                     />
                   </div>
 
-                  {/* Room Stream */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-[#1A1A1A]/80">
                       Interested Developmental Stream
@@ -1226,7 +1264,6 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Black button, rounded full, hover scale 1.05 */}
                 <button 
                   type="submit"
                   className="w-full bg-[#1A1A1A] hover:bg-[#1A1A1A]/90 hover:scale-[1.03] active:scale-95 text-white py-4 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
@@ -1256,7 +1293,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* INSTAGRAM FEED IN FOOTER: 6 Images Cropped Beautifully from the 3 Real Photos (Strict Zero Stock policy) */}
+      {/* INSTAGRAM FEED IN FOOTER: 6 Images from our 10 Real Photos */}
       <section className="bg-[#FFFBF5] py-16 border-t border-[#1A1A1A]/5 px-4 md:px-8">
         <div className="max-w-7xl mx-auto space-y-8">
           <div className="text-center space-y-2">
@@ -1285,7 +1322,7 @@ export default function App() {
                 <img 
                   src={post.src} 
                   alt="Poppy's Daycare Instagram Moments" 
-                  className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${post.position}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />
                 {/* Dark premium overlay with Instagram details */}
@@ -1380,7 +1417,6 @@ export default function App() {
                   placeholder="e.g. mum@sydney.com"
                   className="flex-grow text-xs px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[#7A9A6A]"
                 />
-                {/* Black button inside newsletter */}
                 <button 
                   onClick={() => alert("Thank you! You are subscribed to our private newsletter.")}
                   className="bg-white hover:bg-white/95 text-[#1A1A1A] hover:scale-105 active:scale-95 px-4 py-2.5 rounded-lg text-xs font-bold transition-all cursor-pointer"
@@ -1419,7 +1455,7 @@ export default function App() {
           >
             <button 
               onClick={() => setLightboxImage(null)}
-              className="absolute top-6 right-6 text-white hover:text-[#E53935] transition-colors p-2"
+              className="absolute top-6 right-6 text-white hover:text-[#E53935] transition-colors p-2 animate-none"
               aria-label="Close Lightbox"
             >
               <X size={28} />
@@ -1428,7 +1464,7 @@ export default function App() {
               <img 
                 src={lightboxImage} 
                 alt="Poppy's Daycare Detail" 
-                className="max-w-full max-h-[85vh] object-contain mx-auto"
+                className="max-w-full max-h-[85vh] object-contain mx-auto rounded-lg"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -1608,7 +1644,7 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* STICKY BOTTOM BOOK TOUR ACTION BAR FOR MOBILE (Height capped below 15% mobile viewport size) */}
+      {/* STICKY BOTTOM BOOK TOUR ACTION BAR FOR MOBILE */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#FFFBF5]/90 backdrop-blur-md border-t border-[#1A1A1A]/10 py-3.5 px-6 z-40 flex items-center justify-between shadow-lg">
         <div className="flex flex-col">
           <span className="font-serif text-sm font-bold text-[#1A1A1A] leading-none">Poppy's Moorebank</span>
@@ -1616,7 +1652,7 @@ export default function App() {
         </div>
         <button 
           onClick={() => setIsTourModalOpen(true)}
-          className="bg-[#1A1A1A] hover:bg-[#1A1A1A]/95 hover:scale-105 active:scale-95 text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
+          className="bg-[#1A1A1A] hover:bg-[#1A1A1A]/95 hover:scale-105 active:scale-95 text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all flex items-center gap-1.5 shadow-md cursor-pointer animate-none"
         >
           <span>Book Tour</span>
           <ArrowRight size={12} />
