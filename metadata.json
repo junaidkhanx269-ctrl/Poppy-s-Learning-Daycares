@@ -1,0 +1,6 @@
+{
+  "name": "Poppy's Learning Daycares",
+  "description": "Moorebank's premier, luxury long daycare and preschool in Sydney NSW. Cultivating confidence in a high-character, nurturing environment.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
