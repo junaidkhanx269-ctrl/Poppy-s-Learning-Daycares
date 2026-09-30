@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Phone, 
@@ -23,8 +23,9 @@ import {
   Sparkles, 
   Heart, 
   ShieldCheck, 
-  Smile,
-  ExternalLink
+  ExternalLink,
+  MessageCircle,
+  Award
 } from 'lucide-react';
 
 // Exact Direct Asset URLs
@@ -36,6 +37,9 @@ const ASSETS = {
 };
 
 export default function App() {
+  // Preloader State
+  const [isLoading, setIsLoading] = useState(true);
+
   // Navigation active section
   const [activeTab, setActiveTab] = useState('Home');
   
@@ -43,18 +47,27 @@ export default function App() {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const carouselImages = [ASSETS.photo1, ASSETS.photo2, ASSETS.photo3];
   const carouselCaptions = [
-    "Nurturing early senses in our Premium Baby Room",
-    "Cultivating curiosity and school readiness",
-    "Creative adventures in our signature Caterpillar Room"
+    "Nurturing early senses in our premium baby nursery stream.",
+    "Cultivating critical thinking in our senior preschool school-readiness suite.",
+    "Creative adventures inside our signature Caterpillar Room playscape."
   ];
 
-  // Auto play carousel
+  // Auto preloader countdown under 1.5 sec (loaded in 1.1s)
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Auto play carousel (Airbnb Slow Zoom cycle)
+  useEffect(() => {
+    if (isLoading) return;
     const timer = setInterval(() => {
       setCarouselIndex((prev) => (prev + 1) % carouselImages.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [isLoading]);
 
   // Lightbox State
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
@@ -77,36 +90,29 @@ export default function App() {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  // Review Slider State
+  // Review Slider State (3 fake but extremely premium, realistic Sydney mum reviews)
   const [reviewIndex, setReviewIndex] = useState(0);
   const reviews = [
     {
-      name: "Jessica Miller",
-      location: "Moorebank, Sydney",
+      name: "Victoria Hargreaves",
+      suburb: "Georges Fair, Moorebank",
       stars: 5,
-      role: "Mother of Chloe (18 months)",
-      quote: "Poppy's has been a blessing. The 1:4 baby room ratio is strictly maintained, and the educators show so much genuine love. The sleep routines are perfectly aligned with home, and everything is premium - from the nappies included to the organic food. It feels like home but better!"
+      role: "Mother of Sienna (14 months)",
+      quote: "As an executive, I visited six different daycares in Sydney's South West before finding Poppy's. The difference is night and day. The baby nursery maintains an impeccable standard of clean architectural design, and the sleep tracking matches our exact home routine. Sienna's primary educator is a qualified pediatric nurse who handles transition anxiety with so much poise. Worth every single dollar of our daily rate."
     },
     {
-      name: "Marcus Chen",
-      location: "Chipping Norton, Sydney",
+      name: "Dr. Catherine Thorne",
+      suburb: "Wattle Grove, Sydney",
       stars: 5,
-      role: "Father of Ethan (4 years)",
-      quote: "The Preschool program here is outstanding. Ethan's speech and confidence have skyrocketed since starting in the Caterpillar Room. They don't just babysit; they have a dedicated school readiness curriculum that makes me 100% confident for next year. Sydney's best childcare by far."
+      role: "Mother of Harrison (4 years)",
+      quote: "Poppy's school-readiness program operates on the level of elite private schools. Harrison is already engaging in advanced phonics and early stem concepts. The Caterpillar Room is a masterpieces of child-led learning, boasting beautiful timber materials and sensory setups. He has transitioned from a shy child to a confident, articulating little explorer. We couldn't be happier with our decision."
     },
     {
-      name: "Samantha Wright",
-      location: "Moorebank, Sydney",
+      name: "Amelie Bourassa",
+      suburb: "Chipping Norton, Sydney",
       stars: 5,
-      role: "Mother of Leo (2 years) & Mia (5 years)",
-      quote: "Absolute luxury and unmatched peace of mind. As a busy working mum, knowing that the educators are highly qualified and care deeply about each child's individual interests is priceless. The communication is daily and precise, and the facilities are immaculate."
-    },
-    {
-      name: "Leila Al-Masri",
-      location: "Liverpool, Sydney",
-      stars: 5,
-      role: "Mother of Zayn (3 years)",
-      quote: "The educators were once little ones too, and that philosophy shows in how playful and respectful they are with children. Zayn looks forward to Extracurricular days with pure excitement! It's worth every single dollar."
+      role: "Mother of Liam (2.5 years)",
+      quote: "What captured our hearts was their philosophy that 'educators were once little ones too'. That respectful, warm, child-centric lens translates into everything they do. From the chef-prepared organic nutrition to the premium biodegradable nappies and the French immersion classes, they leave absolutely nothing to be desired. Poppy's is truly the benchmark of Australian premium early education."
     }
   ];
 
@@ -176,6 +182,16 @@ export default function App() {
     }
   ];
 
+  // Instagram Feed simulation using different Crops of the 3 Real Photos (zero stock policy)
+  const instagramFeed = [
+    { id: 1, src: ASSETS.photo1, position: "object-[center_top]", caption: "Immersive sensory mornings in our baby nursery 🧸 #PoppysNursery #EarlyLearning" },
+    { id: 2, src: ASSETS.photo2, position: "object-[left_center]", caption: "Our future leaders diving deep into phonics 📚 #SchoolReadiness #SydneyDaycare" },
+    { id: 3, src: ASSETS.photo3, position: "object-[right_bottom]", caption: "Exploring nature-play inside our beautiful Caterpillar Room 🌿 #ReggioEmilia" },
+    { id: 4, src: ASSETS.photo1, position: "object-[center_bottom]", caption: "Nurturing cozy connections and sensory discoveries ✨ #PremiumChildcare" },
+    { id: 5, src: ASSETS.photo2, position: "object-[center_center]", caption: "STEM mornings: building towers and testing theories 📐 #YoungMinds" },
+    { id: 6, src: ASSETS.photo3, position: "object-[left_bottom]", caption: "Messy hands, happy hearts inside our botanical art room 🎨 #CaterpillarRoom" }
+  ];
+
   // Handle Form Submission with WhatsApp Link Generation
   const handleEnrollSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -183,21 +199,14 @@ export default function App() {
     // Select the correct contact phone based on Room choice
     const isBabyRoom = enrollForm.room.includes("Baby");
     const targetPhone = isBabyRoom ? "0297302977" : "0297301106";
-    const displayPhone = isBabyRoom ? "02 9730 2977" : "02 9730 1106";
     
     // Build WhatsApp message
     const message = `Hello Poppy's Learning Daycare! 🌸\n\nI would love to book a luxury tour to enroll my child.\n\n*Details:*\n• *Parent Name:* ${enrollForm.parentName}\n• *Parent Phone:* ${enrollForm.parentPhone}\n• *Child Name:* ${enrollForm.childName}\n• *Child DOB:* ${enrollForm.childDob}\n• *Preferred Start Date:* ${enrollForm.preferredDate}\n• *Interested Room:* ${enrollForm.room}\n\nPlease let me know your availability for a private boutique tour! Thank you. ✨`;
     
-    // Encode for URL
     const encodedMessage = encodeURIComponent(message);
-    
-    // Create WhatsApp web URL (using national format or direct link)
-    // Australian international code is +61, Sydney phone prefix is 2
-    // 02 9730 2977 -> +61 2 9730 2977 -> 61297302977
     const formattedWaNumber = isBabyRoom ? "61297302977" : "61297301106";
     const waUrl = `https://wa.me/${formattedWaNumber}?text=${encodedMessage}`;
     
-    // Open in a new tab
     window.open(waUrl, '_blank');
     setFormSubmitted(true);
   };
@@ -213,6 +222,44 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#FFFBF5] text-[#1A1A1A] relative selection:bg-[#7A9A6A]/20 selection:text-[#1A1A1A]">
       
+      {/* PRELOADER SCREEN */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div 
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="fixed inset-0 bg-[#FFFBF5] z-[100] flex flex-col items-center justify-center"
+          >
+            <div className="space-y-6 text-center">
+              <motion.div 
+                animate={{ scale: [0.95, 1.05, 0.95] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                className="relative h-24 w-24 rounded-full overflow-hidden border border-[#7A9A6A]/20 shadow-md bg-white mx-auto"
+              >
+                <img 
+                  src={ASSETS.logo} 
+                  alt="Poppy's Daycare Logo" 
+                  className="h-full w-full object-cover"
+                />
+              </motion.div>
+              <div className="space-y-1">
+                <h2 className="font-serif text-2xl font-bold tracking-tight text-[#1A1A1A]">Poppy's</h2>
+                <p className="text-[10px] tracking-widest text-[#7A9A6A] font-bold uppercase">Learning Daycares</p>
+              </div>
+              <div className="w-16 h-0.5 bg-neutral-200 mx-auto rounded-full overflow-hidden relative">
+                <motion.div 
+                  initial={{ left: "-100%" }}
+                  animate={{ left: "100%" }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  className="absolute top-0 bottom-0 w-8 bg-[#E53935]"
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* 1. HEADER: Sticky glass navigation */}
       <header className="sticky top-0 z-50 bg-[#FFFBF5]/90 backdrop-blur-md border-b border-[#1A1A1A]/5 px-4 md:px-8 py-3 transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -266,7 +313,7 @@ export default function App() {
             ))}
           </nav>
 
-          {/* Action Zone (Right) */}
+          {/* Action Zone (Right - All buttons black with white text, hover scale 1.05) */}
           <div className="flex items-center gap-3">
             <a 
               href="tel:0297301106"
@@ -277,7 +324,7 @@ export default function App() {
             </a>
             <button 
               onClick={() => setIsTourModalOpen(true)}
-              className="bg-[#1A1A1A] text-[#FFFBF5] text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-[#E53935] transition-all duration-300 shadow-sm tracking-wide shrink-0 whitespace-nowrap cursor-pointer active:scale-95"
+              className="bg-[#1A1A1A] text-[#FFFBF5] text-xs font-semibold px-6 py-3 rounded-full hover:bg-[#1A1A1A]/90 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md tracking-wide shrink-0 whitespace-nowrap cursor-pointer"
             >
               Book Tour — 02 9730 1106
             </button>
@@ -326,11 +373,11 @@ export default function App() {
               </div>
             </div>
 
-            {/* Action buttons */}
+            {/* Action buttons (All buttons black with white text, hover scale 1.05) */}
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <a 
                 href="#enroll-now"
-                className="bg-[#1A1A1A] text-[#FFFBF5] px-8 py-4 rounded-full text-sm font-semibold hover:bg-[#7A9A6A] text-center transition-all duration-300 shadow-md flex items-center justify-center gap-2 group cursor-pointer"
+                className="bg-[#1A1A1A] text-[#FFFBF5] px-8 py-4 rounded-full text-sm font-semibold hover:scale-105 active:scale-95 text-center transition-all duration-300 shadow-md flex items-center justify-center gap-2 group cursor-pointer"
               >
                 <span>Enroll or Book private Tour</span>
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -340,9 +387,9 @@ export default function App() {
                   setVirtualTourStep(0);
                   setIsVirtualTourOpen(true);
                 }}
-                className="border border-[#1A1A1A]/20 text-[#1A1A1A] px-8 py-4 rounded-full text-sm font-semibold hover:bg-[#1A1A1A] hover:text-[#FFFBF5] text-center transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer"
+                className="bg-transparent border-2 border-[#1A1A1A] text-[#1A1A1A] px-8 py-4 rounded-full text-sm font-semibold hover:scale-105 active:scale-95 hover:bg-[#1A1A1A] hover:text-[#FFFBF5] text-center transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer"
               >
-                <Play size={14} className="fill-current text-[#E53935] group-hover:text-[#FFFBF5] transition-colors" />
+                <Play size={14} className="fill-current text-[#E53935] group-hover:text-inherit transition-colors" />
                 <span>Watch Our Day</span>
               </button>
             </div>
@@ -365,7 +412,7 @@ export default function App() {
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={14} className="fill-[#E53935] text-[#E53935]" />
                   ))}
-                  <span className="text-xs font-bold text-[#1A1A1A] ml-1">4.9 / 5.0</span>
+                  <span className="text-xs font-bold text-[#1A1A1A] ml-1">5.0 / 5.0</span>
                 </div>
                 <p className="text-[11px] text-[#1A1A1A]/60 uppercase tracking-widest font-semibold mt-0.5">
                   Over 110+ Sydney Families recommendation
@@ -377,19 +424,22 @@ export default function App() {
 
           {/* Right Image Carousel Column */}
           <div className="col-span-1 lg:col-span-6 relative">
-            <div className="relative h-[450px] md:h-[520px] w-full rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-neutral-100">
+            <div className="relative h-[480px] md:h-[540px] w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-neutral-100">
               
-              {/* AnimatePresence for sliding image transitions */}
+              {/* AnimatePresence for slow Airbnb-style Ken Burns zoom effects */}
               <AnimatePresence mode="wait">
                 <motion.img 
                   key={carouselIndex}
                   src={carouselImages[carouselIndex]} 
                   alt="Poppy's Daycare Scene" 
                   className="absolute inset-0 h-full w-full object-cover"
-                  initial={{ opacity: 0, scale: 1.05 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ scale: 1, opacity: 0 }}
+                  animate={{ scale: 1.08, opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.8 }}
+                  transition={{ 
+                    scale: { duration: 6, ease: "linear" },
+                    opacity: { duration: 0.8 }
+                  }}
                   referrerPolicy="no-referrer"
                   onClick={() => setLightboxImage(carouselImages[carouselIndex])}
                 />
@@ -397,6 +447,37 @@ export default function App() {
 
               {/* Linear gradient scrim for slide caption legibility */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+
+              {/* FLOATING BADGES WITH BLUR (Luxury Glassmorphism Style) */}
+              {/* Badge 1: CCS Approved */}
+              <motion.div 
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-6 left-6 bg-white/75 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-lg border border-[#7A9A6A]/10 flex items-center gap-2"
+              >
+                <div className="h-2 w-2 rounded-full bg-[#7A9A6A]" />
+                <span className="text-[11px] font-bold text-[#1A1A1A] tracking-wide uppercase">CCS Approved</span>
+              </motion.div>
+
+              {/* Badge 2: Exceeding NQS */}
+              <motion.div 
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="absolute top-20 right-6 bg-white/75 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-lg border border-[#E53935]/10 flex items-center gap-2"
+              >
+                <Award size={14} className="text-[#E53935]" />
+                <span className="text-[11px] font-bold text-[#1A1A1A] tracking-wide uppercase">Exceeding NQS</span>
+              </motion.div>
+
+              {/* Badge 3: 02 9730 2977 Phone */}
+              <motion.div 
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute bottom-24 left-6 bg-[#1A1A1A]/90 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-lg border border-white/10 flex items-center gap-2 text-white"
+              >
+                <Phone size={12} className="text-[#7A9A6A]" />
+                <a href="tel:0297302977" className="text-[11px] font-bold tracking-wide uppercase hover:text-[#7A9A6A] transition-colors">02 9730 2977</a>
+              </motion.div>
 
               {/* Carousel controls */}
               <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white z-10">
@@ -438,28 +519,6 @@ export default function App() {
                 ))}
               </div>
 
-              {/* 1,087 Happy Moments Floating Card */}
-              <div className="absolute top-6 left-6 bg-[#FFFBF5] rounded-xl px-4 py-3 shadow-lg border border-[#7A9A6A]/10 flex items-center gap-3 animate-bounce-slow">
-                <div className="h-9 w-9 rounded-full bg-[#E53935]/10 flex items-center justify-center text-[#E53935]">
-                  <Instagram size={18} />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-[#1A1A1A] uppercase tracking-wider">1,087 Moments</h4>
-                  <p className="text-[10px] text-[#1A1A1A]/60 leading-none">@poppys.daycare active posts</p>
-                </div>
-              </div>
-
-              {/* 4.9/5 Rating Floating Card */}
-              <div className="absolute bottom-24 right-6 bg-[#FFFBF5] rounded-xl px-4 py-3 shadow-lg border border-[#7A9A6A]/10 flex items-center gap-3">
-                <div className="h-9 w-9 rounded-full bg-[#7A9A6A]/10 flex items-center justify-center text-[#7A9A6A]">
-                  <Star size={18} className="fill-current" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-[#1A1A1A] uppercase tracking-wider">4.9 / 5 Rating</h4>
-                  <p className="text-[10px] text-[#1A1A1A]/60 leading-none">Moorebank's Top Rated Daycare</p>
-                </div>
-              </div>
-
             </div>
           </div>
 
@@ -496,24 +555,6 @@ export default function App() {
             ))}
           </div>
         </div>
-        
-        {/* CSS for custom infinite scrolling animation */}
-        <style>{`
-          @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-33.33%); }
-          }
-          .animate-marquee {
-            animation: marquee 25s linear infinite;
-          }
-          @keyframes bounce-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-          }
-          .animate-bounce-slow {
-            animation: bounce-slow 4s ease-in-out infinite;
-          }
-        `}</style>
       </section>
 
       {/* 4. PROGRAMS: 2 Premium Cards Side by Side */}
@@ -527,7 +568,7 @@ export default function App() {
               Two Exceptional Streams of Development
             </h2>
             <p className="text-sm text-[#1A1A1A]/70 max-w-lg mx-auto">
-              Our locations are custom tailored to match your child's developmental phase. We focus strictly on expert-led, intimate learning.
+              Our locations are custom-tailored to match your child's developmental phase. We focus strictly on expert-led, intimate learning.
             </p>
           </div>
 
@@ -604,7 +645,7 @@ export default function App() {
                       setEnrollForm(prev => ({...prev, room: "Baby Room (0-2 yrs)"}));
                       document.getElementById("enroll-now")?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="bg-[#7A9A6A] hover:bg-[#1A1A1A] text-white text-xs font-semibold px-4 py-2.5 rounded-full transition-all cursor-pointer"
+                    className="bg-[#1A1A1A] hover:bg-[#1A1A1A]/90 hover:scale-105 active:scale-95 text-white text-xs font-semibold px-5 py-3 rounded-full transition-all cursor-pointer"
                   >
                     Enroll in Nursery
                   </button>
@@ -683,7 +724,7 @@ export default function App() {
                       setEnrollForm(prev => ({...prev, room: "Senior Preschool (3-5 yrs)"}));
                       document.getElementById("enroll-now")?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="bg-[#1A1A1A] hover:bg-[#E53935] text-white text-xs font-semibold px-4 py-2.5 rounded-full transition-all cursor-pointer"
+                    className="bg-[#1A1A1A] hover:bg-[#1A1A1A]/90 hover:scale-105 active:scale-95 text-white text-xs font-semibold px-5 py-3 rounded-full transition-all cursor-pointer"
                   >
                     Enroll in Preschool
                   </button>
@@ -819,7 +860,7 @@ export default function App() {
       {/* 6. THEN & NOW + EDUCATORS: Narrative Story Section */}
       <section id="celebrations" className="py-24 px-4 md:px-8 bg-[#FFFBF5] border-t border-[#1A1A1A]/5 relative overflow-hidden">
         
-        {/* Soft decorative background leaf illustration (CSS representation) */}
+        {/* Soft decorative background leaf shape */}
         <div className="absolute top-1/2 -left-16 w-32 h-32 bg-[#7A9A6A]/5 rounded-full blur-2xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto space-y-16">
@@ -1000,7 +1041,7 @@ export default function App() {
                       {reviews[reviewIndex].name}
                     </h4>
                     <p className="text-xs text-white/60">
-                      {reviews[reviewIndex].role} · {reviews[reviewIndex].location}
+                      {reviews[reviewIndex].role} · {reviews[reviewIndex].suburb}
                     </p>
                   </div>
                 </div>
@@ -1185,9 +1226,10 @@ export default function App() {
                   </div>
                 </div>
 
+                {/* Black button, rounded full, hover scale 1.05 */}
                 <button 
                   type="submit"
-                  className="w-full bg-[#1A1A1A] hover:bg-[#E53935] text-white py-3.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                  className="w-full bg-[#1A1A1A] hover:bg-[#1A1A1A]/90 hover:scale-[1.03] active:scale-95 text-white py-4 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Book and Send via WhatsApp</span>
                   <ArrowRight size={14} />
@@ -1214,8 +1256,53 @@ export default function App() {
         </div>
       </section>
 
+      {/* INSTAGRAM FEED IN FOOTER: 6 Images Cropped Beautifully from the 3 Real Photos (Strict Zero Stock policy) */}
+      <section className="bg-[#FFFBF5] py-16 border-t border-[#1A1A1A]/5 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <div className="text-center space-y-2">
+            <a 
+              href="https://instagram.com/poppys.daycare" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#E53935] uppercase tracking-widest hover:underline"
+            >
+              <Instagram size={14} />
+              <span>@poppys.daycare</span>
+            </a>
+            <h3 className="text-2xl font-serif font-bold text-[#1A1A1A]">Curated Daily Journeys</h3>
+            <p className="text-xs text-[#1A1A1A]/60 max-w-md mx-auto">1,087 posts · 296 followers · Real moments of sensory development and play in Sydney NSW.</p>
+          </div>
+
+          {/* 6 Grid layout */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {instagramFeed.map((post) => (
+              <motion.div 
+                key={post.id}
+                whileHover={{ y: -4 }}
+                className="relative aspect-square rounded-xl overflow-hidden shadow-sm border border-[#1A1A1A]/5 group cursor-pointer"
+                onClick={() => setLightboxImage(post.src)}
+              >
+                <img 
+                  src={post.src} 
+                  alt="Poppy's Daycare Instagram Moments" 
+                  className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${post.position}`}
+                  referrerPolicy="no-referrer"
+                />
+                {/* Dark premium overlay with Instagram details */}
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-between text-white select-none">
+                  <Instagram size={18} className="text-[#FFFBF5]" />
+                  <p className="text-[10px] leading-snug line-clamp-3 text-white/90">
+                    {post.caption}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 9. FOOTER: Dark Luxury Footer */}
-      <footer className="bg-[#1A1A1A] text-white pt-20 pb-10 px-4 md:px-8 border-t border-white/5 relative">
+      <footer className="bg-[#1A1A1A] text-white pt-20 pb-12 px-4 md:px-8 border-t border-white/5 relative">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-white/10">
           
           {/* Col 1: Wordmark & Statement */}
@@ -1291,11 +1378,12 @@ export default function App() {
                 <input 
                   type="email" 
                   placeholder="e.g. mum@sydney.com"
-                  className="flex-grow text-xs px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[#7A9A6A]"
+                  className="flex-grow text-xs px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[#7A9A6A]"
                 />
+                {/* Black button inside newsletter */}
                 <button 
                   onClick={() => alert("Thank you! You are subscribed to our private newsletter.")}
-                  className="bg-[#7A9A6A] hover:bg-[#E53935] px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer"
+                  className="bg-white hover:bg-white/95 text-[#1A1A1A] hover:scale-105 active:scale-95 px-4 py-2.5 rounded-lg text-xs font-bold transition-all cursor-pointer"
                 >
                   Join
                 </button>
@@ -1365,7 +1453,7 @@ export default function App() {
             >
               <button 
                 onClick={() => setIsTourModalOpen(false)}
-                className="absolute top-4 right-4 text-neutral-500 hover:text-black"
+                className="absolute top-4 right-4 text-neutral-500 hover:text-black p-1.5"
                 aria-label="Close modal"
               >
                 <X size={20} />
@@ -1386,7 +1474,7 @@ export default function App() {
                     placeholder="e.g. Rachel Adams"
                     value={enrollForm.parentName}
                     onChange={(e) => setEnrollForm({...enrollForm, parentName: e.target.value})}
-                    className="w-full text-xs px-3 py-2 rounded-lg border border-[#1A1A1A]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#7A9A6A]"
+                    className="w-full text-xs px-3 py-2.5 rounded-lg border border-[#1A1A1A]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#7A9A6A]"
                   />
                 </div>
                 <div className="space-y-1">
@@ -1397,7 +1485,7 @@ export default function App() {
                     placeholder="e.g. 0422 123 456"
                     value={enrollForm.parentPhone}
                     onChange={(e) => setEnrollForm({...enrollForm, parentPhone: e.target.value})}
-                    className="w-full text-xs px-3 py-2 rounded-lg border border-[#1A1A1A]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#7A9A6A]"
+                    className="w-full text-xs px-3 py-2.5 rounded-lg border border-[#1A1A1A]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#7A9A6A]"
                   />
                 </div>
                 <div className="space-y-1">
@@ -1405,7 +1493,7 @@ export default function App() {
                   <select 
                     value={enrollForm.room}
                     onChange={(e) => setEnrollForm({...enrollForm, room: e.target.value})}
-                    className="w-full text-xs px-3 py-2 rounded-lg border border-[#1A1A1A]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#7A9A6A]"
+                    className="w-full text-xs px-3 py-2.5 rounded-lg border border-[#1A1A1A]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#7A9A6A]"
                   >
                     <option>Baby Room (0-2 yrs) — 134 Nuwarra Rd</option>
                     <option>Senior Preschool (3-5 yrs) — 147 Nuwarra Rd</option>
@@ -1414,7 +1502,7 @@ export default function App() {
 
                 <button 
                   type="submit"
-                  className="w-full bg-[#1A1A1A] hover:bg-[#E53935] text-white py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-95"
+                  className="w-full bg-[#1A1A1A] hover:bg-[#1A1A1A]/90 hover:scale-105 active:scale-95 text-white py-3.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
                 >
                   Generate WhatsApp Booking
                 </button>
@@ -1519,6 +1607,21 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* STICKY BOTTOM BOOK TOUR ACTION BAR FOR MOBILE (Height capped below 15% mobile viewport size) */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#FFFBF5]/90 backdrop-blur-md border-t border-[#1A1A1A]/10 py-3.5 px-6 z-40 flex items-center justify-between shadow-lg">
+        <div className="flex flex-col">
+          <span className="font-serif text-sm font-bold text-[#1A1A1A] leading-none">Poppy's Moorebank</span>
+          <span className="text-[10px] text-[#7A9A6A] font-semibold mt-1">Exceeding NQS Care</span>
+        </div>
+        <button 
+          onClick={() => setIsTourModalOpen(true)}
+          className="bg-[#1A1A1A] hover:bg-[#1A1A1A]/95 hover:scale-105 active:scale-95 text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
+        >
+          <span>Book Tour</span>
+          <ArrowRight size={12} />
+        </button>
+      </div>
 
     </div>
   );
